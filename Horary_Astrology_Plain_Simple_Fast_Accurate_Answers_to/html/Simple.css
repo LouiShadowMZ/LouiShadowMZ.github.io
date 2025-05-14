@@ -103,7 +103,7 @@ img {
 }
 
 .cl-firstlineindentedparagraph {
-    text-indent: 1.5em;
+    text-indent: 0;
 }
 
 .cl-nonindentedparagraph {
