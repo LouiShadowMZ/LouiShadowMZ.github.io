@@ -1,0 +1,129 @@
+/* Reset and base styles */
+html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 1rem;
+    color: inherit;
+    background-color: inherit;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 0.3em;
+}
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e1e1e1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.navigation-buttons a {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #0078d4;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+.navigation-buttons a:hover {
+    background-color: #106ebe;
+}
+
+/* Table of Contents */
+.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.toc li {
+    margin-bottom: 0.5rem;
+}
+
+.toc .level-1 > a {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.toc .level-2 > a { margin-left: 1rem; }
+.toc .level-3 > a { margin-left: 2rem; }
+.toc .level-4 > a { margin-left: 3rem; }
+.toc .level-5 > a { margin-left: 4rem; }
+.toc .level-6 > a { margin-left: 5rem; }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 0.5rem;
+    }
+    
+    .container {
+        padding: 0.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .navigation-buttons a {
+        min-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc .level-1 > a { font-size: 1rem; }
+    .toc .level-2 > a { margin-left: 0.5rem; }
+    .toc .level-3 > a { margin-left: 1rem; }
+    .toc .level-4 > a { margin-left: 1.5rem; }
+    .toc .level-5 > a { margin-left: 2rem; }
+    .toc .level-6 > a { margin-left: 2.5rem; }
+}
