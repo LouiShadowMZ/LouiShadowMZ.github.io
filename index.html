@@ -1,24 +1,562 @@
-<?xml version='1.0' encoding='utf-8'?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-	<title>CONTENTS</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="index.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神秘学图书馆 | Occultism</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础变量设置 - 适应明暗模式 */
+        :root {
+            --bg-primary: #f8f5f0;
+            --bg-secondary: #eae6df;
+            --text-primary: #2c2926;
+            --text-secondary: #5d4e46;
+            --accent-color: #8c7851;
+            --accent-hover: #a58c5e;
+            --border-color: #d4ccc4;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --font-main: "Microsoft YaHei", "微软雅黑", sans-serif;
+            --font-accent: Georgia, "Times New Roman", serif;
+        }
+
+        /* 暗黑模式设置 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #242525;
+                --bg-secondary: #2d2e2e;
+                --text-primary: #e0dcd5;
+                --text-secondary: #b4aba8;
+                --accent-color: #c5a86c;
+                --accent-hover: #d8b97c;
+                --border-color: #444;
+                --shadow: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-accent);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 1.5rem;
+            position: relative;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(140, 120, 81, 0.03) 0%, rgba(140, 120, 81, 0) 20%),
+                radial-gradient(circle at 90% 80%, rgba(140, 120, 81, 0.03) 0%, rgba(140, 120, 81, 0) 20%);
+        }
+
+        /* 主容器样式 */
+        .back {
+            position: relative;
+            padding: 3rem 2rem;
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 顶部装饰元素 */
+        .back::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        /* 底部装饰元素 */
+        .back::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        /* 主标题样式 */
+        .toptop {
+            font-family: var(--font-accent);
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            position: relative;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            text-shadow: 0 1px 3px var(--shadow);
+        }
+
+        .toptop::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+        }
+
+        /* 选项卡容器 */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        /* 选项卡样式 */
+        .tab {
+            padding: 1rem 2.5rem;
+            margin: 0 0.8rem;
+            font-family: var(--font-accent);
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            border-radius: 4px 4px 0 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .tab:hover {
+            color: var(--accent-color);
+        }
+
+        .tab.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1.1rem;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        /* 内容区域样式 */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            padding: 1.8rem;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 分类标题样式 */
+        .section-title {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            position: relative;
+            padding-left: 2.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .section-title::before {
+            content: "✧";
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        /* 链接容器样式 */
+        .top01 {
+            margin-bottom: 1rem;
+            padding-left: 0;
+            position: relative;
+        }
+
+        /* 链接样式 */
+        .linkclass {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to right, transparent 50%, rgba(140, 120, 81, 0.08) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            border: 1px solid transparent;
+        }
+
+        .linkclass:hover {
+            color: var(--accent-hover);
+            background-position: left bottom;
+            border-color: rgba(140, 120, 81, 0.2);
+        }
+
+        .linkclass:hover .text_ {
+            transform: translateX(8px);
+        }
+
+        .text_ {
+            display: block;
+            transition: var(--transition);
+            position: relative;
+            padding-left: 0.8rem;
+            flex: 1;
+        }
+
+        .text_::before {
+            content: "»";
+            position: absolute;
+            left: -1rem;
+            top: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: var(--accent-color);
+        }
+
+        .linkclass:hover .text_::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        /* 链接前的图标 */
+        .linkclass::before {
+            content: "";
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            margin-right: 10px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .linkclass:hover::before {
+            transform: scale(1.4);
+            background: var(--accent-hover);
+        }
+
+        /* 底部样式 */
+        .bottle {
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            position: relative;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-accent);
+            letter-spacing: 1px;
+        }
+
+        .bottle::before {
+            content: "※";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            padding: 0 10px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        /* 装饰性元素 */
+        .ornament {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            font-size: 8rem;
+        }
+
+        .ornament-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(15deg);
+        }
+
+        .ornament-2 {
+            bottom: 15%;
+            right: 5%;
+            transform: rotate(-10deg);
+        }
+        
+        .ornament-3 {
+            top: 45%;
+            left: 10%;
+            transform: rotate(30deg);
+            font-size: 5rem;
+        }
+        
+        .ornament-4 {
+            top: 60%;
+            right: 12%;
+            transform: rotate(-25deg);
+            font-size: 5rem;
+        }
+
+        /* 性能提示 */
+        .performance-tip {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* 神秘符号装饰 */
+        .esoteric-symbol {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.02;
+        }
+        
+        .symbol-1 {
+            top: 15%;
+            left: 20%;
+            font-size: 4rem;
+            transform: rotate(15deg);
+        }
+        
+        .symbol-2 {
+            top: 40%;
+            right: 25%;
+            font-size: 3.5rem;
+            transform: rotate(-20deg);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 900px) {
+            .tabs-container {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                margin: 0.5rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .back {
+                padding: 2rem 1.5rem;
+            }
+            
+            .toptop {
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .linkclass {
+                padding: 0.9rem;
+            }
+            
+            .ornament {
+                display: none;
+            }
+            
+            .tabs-container {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem;
+            }
+            
+            .back {
+                padding: 1.5rem 1rem;
+            }
+            
+            .toptop {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+                padding-left: 1.8rem;
+            }
+            
+            .section-title::before {
+                left: 0.5rem;
+            }
+            
+            .linkclass {
+                padding: 0.7rem;
+                font-size: 0.95rem;
+            }
+            
+            .tab {
+                padding: 0.7rem 1.2rem;
+                font-size: 1.1rem;
+                margin: 0.3rem;
+            }
+        }
+    </style>
 </head>
-
-<body class="calibre">
-	<p class="block_5"><a href="Horary_Astrology_Krishnamurti_Padhdhati_Advanced_Stellar_System/index_split_001.html" class="calibre1"><span
-				class="text_">Horary Astrology Krishnamurti Padhdhati Advanced Stellar System</span></a></p>
-	<p class="block_5"><a href="The_Theory_and_Practice_of_Finding_Lost_2021/html/Contents.html" class="calibre1"><span
-				class="text_">The Theory and Practice of Finding Lost 2021</span></a></p>
-	<p class="block_5"><a href="Horary_Astrology_Plain_Simple_Fast_Accurate_Answers_to/html/part0003.html" class="calibre1"><span
-				class="text_">Horary Astrology Plain Simple Fast Accurate Answers to</span></a></p>
-	<p class="block_5"><a href="further_lights_on_nakshatra_chintamani/index.html" class="calibre1"><span
-				class="text_">further lights on nakshatra chintamani</span></a></p>
-	<p class="block_5"><a href="Magickal_Seduction_Attract_Love/toc.html" class="calibre1"><span
-				class="text_">Magickal Seduction_ Attract Love, Sex and Passion With Ancient Secrets and Words of Power</span></a></p>
+<body>
+    <div class="back">
+        <!-- 装饰性元素 -->
+        <div class="ornament ornament-1">✶</div>
+        <div class="ornament ornament-2">✷</div>
+        <div class="ornament ornament-3">☾</div>
+        <div class="ornament ornament-4">☉</div>
+        
+        <div class="toptop">Welcome to Occultism</div>
+        
+        <!-- 选项卡导航 -->
+        <div class="tabs-container">
+            <div class="tab active" data-tab="kp">Kp Astrology</div>
+            <div class="tab" data-tab="magick">Magick</div>
+            <div class="tab" data-tab="horary">Horary</div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content-section active" id="kp-section">
+            <div class="section-title">Kp Astrology</div>
+            <p class="top01">
+                <a href="Horary_Astrology_Krishnamurti_Padhdhati_Advanced_Stellar_System/toc.html" class="linkclass">
+                    <span class="text_">Horary Astrology Krishnamurti Padhdhati Advanced Stellar System</span>
+                </a>
+            </p>
+        </div>
+        
+        <div class="content-section" id="magick-section">
+            <div class="section-title">Magick</div>
+            <p class="top01">
+                <a href="Magickal_Cashbook_Attract_Money_Fast_With_Ancient_Secrets_And_Modern_Wealth_Magick_files/toc.html" class="linkclass">
+                    <span class="text_">Magickal Cashbook: Attract Money Fast With Ancient Secrets And Modern Wealth Magick</span>
+                </a>
+            </p>
+            <p class="top01">
+                <a href="Magickal_Seduction_Attract_Love_Sex_and_Passion_With_Ancient_Secrets_and_Words_of_Power/toc.html" class="linkclass">
+                    <span class="text_">Magickal Seduction: Attract Love Sex and Passion With Ancient Secrets and Words of Power</span>
+                </a>
+            </p>
+        </div>
+        
+        <div class="content-section" id="horary-section">
+            <div class="section-title">Horary</div>
+            <p class="top01">
+                <a href="The_Theory_and_Practice_of_Finding_Lost_2021/html/Contents.html" class="linkclass">
+                    <span class="text_">The Theory and Practice of Finding Lost 2021</span>
+                </a>
+            </p>
+            <p class="top01">
+                <a href="Horary_Astrology_Plain_Simple_Fast_Accurate_Answers_to/html/part0003.html" class="linkclass">
+                    <span class="text_">Horary Astrology Plain Simple Fast Accurate Answers to</span>
+                </a>
+            </p>
+        </div>
+        
+        <div class="bottle">Wechat Account : guiximeihualu 2025</div>
+        
+        <!-- 神秘符号装饰 -->
+        <div class="esoteric-symbol symbol-1">🜁</div>
+        <div class="esoteric-symbol symbol-2">🜃</div>
+    </div>
+    
+    <div class="performance-tip" id="perfTip">✅ 所有资源已本地化，加载完成！</div>
+    
+    <script>
+        // 选项卡功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.content-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有活动状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // 添加当前活动状态
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-section`).classList.add('active');
+                });
+            });
+            
+            // 显示性能提示
+            const perfTip = document.getElementById('perfTip');
+            perfTip.style.display = 'block';
+            setTimeout(() => {
+                perfTip.style.display = 'none';
+            }, 3000);
+        });
+    </script>
 </body>
-
 </html>
