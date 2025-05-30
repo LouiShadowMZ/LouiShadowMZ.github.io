@@ -18,6 +18,12 @@
   --toc-symbol-size: 0.7rem; /* 符号大小 */
   --toc-indent-step: 1.5rem; /* 每级缩进量 */
   --toc-symbol-offset: 0rem; /* 符号偏移量 */
+
+  /* 新增优雅风格变量 */
+  --font-accent: Georgia, "Times New Roman", serif;
+  --accent-color: #8c7851;
+  --text-secondary: #5d4e46;
+  --border-light: #d4ccc4;
 }
 
 /* 暗黑模式变量 */
@@ -34,6 +40,11 @@
     --nav-border: #333333;
     --nav-hover: #2d2d2d;
     --shadow-color: rgba(0, 0, 0, 0.3);
+    
+    /* 优雅风格暗黑模式 */
+    --accent-color: #c5a86c;
+    --text-secondary: #b4aba8;
+    --border-light: #444;
   }
 }
 
@@ -61,6 +72,285 @@ body {
   padding: 20px;
 }
 
+/* ======================== 目录专属样式 ======================== */
+.toc-container {
+  padding: 2rem 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+  margin: 2rem auto;
+}
+
+/* 装饰性元素 */
+.toc-container::before,
+.toc-container::after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.toc-container::before {
+  top: 0;
+}
+
+.toc-container::after {
+  bottom: 0;
+}
+
+/* 目录标题 */
+.toc-container h1 {
+  font-family: var(--font-accent);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  position: relative;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+}
+
+.toc-container h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+}
+
+/* 目录项样式 */
+.toc-item {
+  margin: 0;
+  padding: 0.35rem 0;
+  line-height: 1.6;
+  position: relative;
+  transition: all 0.2s ease;
+  font-family: var(--font-accent);
+}
+
+.toc-item a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease, transform 0.1s ease;
+  padding-left: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.toc-item a:hover {
+  color: var(--accent-color);
+  transform: translateX(3px);
+}
+
+/* 层级缩进 - 使用变量控制 */
+.toc-h1 {
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding-left: 0;
+  margin-top: 1.2rem;
+  position: relative;
+}
+
+.toc-h1:first-child {
+  margin-top: 0;
+}
+
+.toc-h2 {
+  padding-left: calc(1 * var(--toc-indent-step));
+}
+
+.toc-h3 {
+  padding-left: calc(2 * var(--toc-indent-step));
+}
+
+.toc-h4 {
+  padding-left: calc(3 * var(--toc-indent-step));
+}
+
+.toc-h5 {
+  padding-left: calc(4 * var(--toc-indent-step));
+}
+
+.toc-h6 {
+  padding-left: calc(5 * var(--toc-indent-step));
+}
+
+/* 添加层级标识符号 - 使用变量控制 */
+.toc-h2::before,
+.toc-h3::before,
+.toc-h4::before,
+.toc-h5::before,
+.toc-h6::before {
+  content: "";
+  position: absolute;
+  font-size: var(--toc-symbol-size);
+  line-height: 1.5;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-color);
+}
+
+.toc-h2::before { 
+  content: "✧";
+  left: calc(1 * var(--toc-indent-step) - 1.4rem);
+}
+
+.toc-h3::before { 
+  content: "•";
+  left: calc(2 * var(--toc-indent-step) - 1.4rem);
+  font-size: 1.2rem;
+}
+
+.toc-h4::before { 
+  content: "◦";
+  left: calc(3 * var(--toc-indent-step) - 1.4rem);
+}
+
+.toc-h5::before { 
+  content: "▪";
+  left: calc(4 * var(--toc-indent-step) - 1.4rem);
+}
+
+.toc-h6::before { 
+  content: "▫";
+  left: calc(5 * var(--toc-indent-step) - 1.4rem);
+}
+
+/* 文件锚点样式 */
+.file-anchor {
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+/* 返回首页按钮 */
+.button-backhome {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.back-home-button {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  background-color: transparent;
+  color: var(--accent-color);
+  text-decoration: none;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: var(--font-accent);
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.back-home-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.back-home-button:hover {
+  color: var(--bg-color);
+}
+
+.back-home-button:hover::before {
+  width: 100%;
+}
+
+/* 装饰性背景元素 */
+.toc-decoration {
+  position: absolute;
+  opacity: 0.03;
+  z-index: 0;
+  font-size: 8rem;
+  pointer-events: none;
+}
+
+.toc-dec-1 {
+  top: 15%;
+  right: 5%;
+  transform: rotate(15deg);
+}
+
+.toc-dec-2 {
+  bottom: 20%;
+  left: 5%;
+  transform: rotate(-10deg);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+  }
+  
+  .toc-container h1 {
+    font-size: 1.8rem;
+  }
+  
+  :root {
+    --toc-indent-step: 1.2rem;
+  }
+  
+  .toc-h2::before { left: calc(1 * var(--toc-indent-step) - 1.2rem); }
+  .toc-h3::before { left: calc(2 * var(--toc-indent-step) - 1.2rem); }
+  .toc-h4::before { left: calc(3 * var(--toc-indent-step) - 1.2rem); }
+  .toc-h5::before { left: calc(4 * var(--toc-indent-step) - 1.2rem); }
+  .toc-h6::before { left: calc(5 * var(--toc-indent-step) - 1.2rem); }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .toc-container {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .toc-container h1 {
+    font-size: 1.5rem;
+  }
+  
+  :root {
+    --toc-indent-step: 1rem;
+  }
+  
+  .toc-h1 {
+    font-size: 1.1rem;
+  }
+  
+  .toc-item {
+    font-size: 0.95rem;
+  }
+  
+  .toc-h2::before { left: calc(1 * var(--toc-indent-step) - 0.9rem); }
+  .toc-h3::before { left: calc(2 * var(--toc-indent-step) - 0.9rem); }
+  .toc-h4::before { left: calc(3 * var(--toc-indent-step) - 0.9rem); }
+  .toc-h5::before { left: calc(4 * var(--toc-indent-step) - 0.9rem); }
+  .toc-h6::before { left: calc(5 * var(--toc-indent-step) - 0.9rem); }
+}
+
+/* ======================== 原有其他样式保持不变 ======================== */
 /* 标题样式 */
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color);
@@ -251,75 +541,3 @@ a:hover {
     --toc-symbol-offset: 0.3rem;
   }
 }
-
-/* 新增目录样式 */
-.toc-container {
-  padding: 20px 0;
-}
-
-.toc-item {
-  margin: 0;
-  padding: 0.25rem 0;
-  line-height: 1.5;
-  position: relative; /* 添加相对定位 */
-}
-
-.toc-item a {
-  color: var(--text-color); /* 使用正文颜色 */
-  text-decoration: none;
-  display: block;
-  transition: padding 0.2s ease;
-  padding-left: calc(var(--toc-symbol-size) + 0.5rem); /* 为符号留出空间 */
-}
-
-.toc-item a:hover {
-  text-decoration: underline;
-  background-color: transparent;
-}
-
-/* 层级缩进 - 使用变量控制 */
-.toc-h1 {
-  font-weight: bold;
-  padding-left: 0;
-}
-
-.toc-h2 {
-  padding-left: calc(1 * var(--toc-indent-step));
-}
-
-.toc-h3 {
-  padding-left: calc(2 * var(--toc-indent-step));
-}
-
-.toc-h4 {
-  padding-left: calc(3 * var(--toc-indent-step));
-}
-
-.toc-h5 {
-  padding-left: calc(4 * var(--toc-indent-step));
-}
-
-.toc-h6 {
-  padding-left: calc(5 * var(--toc-indent-step));
-}
-
-/* 添加层级标识符号 - 使用变量控制 */
-.toc-h2::before,
-.toc-h3::before,
-.toc-h4::before,
-.toc-h5::before,
-.toc-h6::before {
-  content: var(--toc-symbol);
-  position: absolute;
-  color: var(--text-color);
-  font-size: var(--toc-symbol-size);
-  line-height: 1.5;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.toc-h2::before { left: calc(1 * var(--toc-indent-step) + var(--toc-symbol-offset)); }
-.toc-h3::before { left: calc(2 * var(--toc-indent-step) + var(--toc-symbol-offset)); }
-.toc-h4::before { left: calc(3 * var(--toc-indent-step) + var(--toc-symbol-offset)); }
-.toc-h5::before { left: calc(4 * var(--toc-indent-step) + var(--toc-symbol-offset)); }
-.toc-h6::before { left: calc(5 * var(--toc-indent-step) + var(--toc-symbol-offset)); }
