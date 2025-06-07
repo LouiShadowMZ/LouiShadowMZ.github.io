@@ -1,6 +1,6 @@
-
+/* 基础样式设置 */
 :root {
-
+  /* 白天模式变量 */
   --bg-color: #ffffff;
   --text-color: #333333;
   --heading-color: #222222;
@@ -12,21 +12,15 @@
   --nav-border: #e0e0e0;
   --nav-hover: #e8eaed;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  
 
-  --toc-symbol: "■"; 
-  --toc-symbol-size: 0.7rem; 
-  --toc-indent-step: 1.5rem; 
-  --toc-symbol-offset: 0rem; 
-
-
+  /* 优雅风格变量 */
   --font-accent: Georgia, "Times New Roman", serif;
   --accent-color: #8c7851;
   --text-secondary: #5d4e46;
   --border-light: #d4ccc4;
 }
 
-
+/* 暗黑模式变量 */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #242525;
@@ -40,40 +34,41 @@
     --nav-border: #333333;
     --nav-hover: #2d2d2d;
     --shadow-color: rgba(0, 0, 0, 0.3);
-    
 
+    /* 优雅风格暗黑模式 */
     --accent-color: #c5a86c;
     --text-secondary: #b4aba8;
     --border-light: #444;
   }
 }
 
-
+/* 基础样式重置 */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
+  font-size: 1.1rem;
   line-height: 1.6;
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
+/* 容器样式 */
 body {
-  max-width: 800px;
+  max-width: 60rem;
   margin: 0 auto;
   padding: 20px;
 }
 
-
-.toc-container {
+/* ======================== toc.html专属样式 (完整保留) ======================== */
+.pre_content_01 {
   padding: 2rem 1.5rem;
   background-color: var(--bg-color);
   border-radius: 12px;
@@ -84,9 +79,8 @@ body {
   margin: 2rem auto;
 }
 
-
-.toc-container::before,
-.toc-container::after {
+.pre_content_01::before,
+.pre_content_01::after {
   content: "";
   position: absolute;
   height: 4px;
@@ -96,16 +90,15 @@ body {
   z-index: 1;
 }
 
-.toc-container::before {
+.pre_content_01::before {
   top: 0;
 }
 
-.toc-container::after {
+.pre_content_01::after {
   bottom: 0;
 }
 
-
-.toc-container h1 {
+.pre_content_01 h2 {
   font-family: var(--font-accent);
   font-size: 2.2rem;
   text-align: center;
@@ -116,7 +109,7 @@ body {
   letter-spacing: 1px;
 }
 
-.toc-container h1::after {
+.pre_content_01 h2::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -127,17 +120,16 @@ body {
   background: linear-gradient(to right, transparent, var(--accent-color), transparent);
 }
 
-
-.toc-item {
+.fin_content {
   margin: 0;
   padding: 0.35rem 0;
-  line-height: 1.6;
+  line-height: 3rem;
   position: relative;
   transition: all 0.2s ease;
   font-family: var(--font-accent);
 }
 
-.toc-item a {
+.fin_content a {
   color: var(--text-secondary);
   text-decoration: none;
   display: block;
@@ -147,92 +139,10 @@ body {
   z-index: 2;
 }
 
-.toc-item a:hover {
+.fin_content a:hover {
   color: var(--accent-color);
   transform: translateX(3px);
 }
-
-
-.toc-h1 {
-  font-weight: bold;
-  font-size: 1.3rem;
-  padding-left: 0;
-  margin-top: 1.2rem;
-  position: relative;
-}
-
-.toc-h1:first-child {
-  margin-top: 0;
-}
-
-.toc-h2 {
-  padding-left: calc(1 * var(--toc-indent-step));
-}
-
-.toc-h3 {
-  padding-left: calc(2 * var(--toc-indent-step));
-}
-
-.toc-h4 {
-  padding-left: calc(3 * var(--toc-indent-step));
-}
-
-.toc-h5 {
-  padding-left: calc(4 * var(--toc-indent-step));
-}
-
-.toc-h6 {
-  padding-left: calc(5 * var(--toc-indent-step));
-}
-
-
-.toc-h2::before,
-.toc-h3::before,
-.toc-h4::before,
-.toc-h5::before,
-.toc-h6::before {
-  content: "";
-  position: absolute;
-  font-size: var(--toc-symbol-size);
-  line-height: 1.5;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--accent-color);
-}
-
-.toc-h2::before { 
-  content: "✧";
-  left: calc(1 * var(--toc-indent-step) - 1.4rem);
-}
-
-.toc-h3::before { 
-  content: "•";
-  left: calc(2 * var(--toc-indent-step) - 1.4rem);
-  font-size: 1.2rem;
-}
-
-.toc-h4::before { 
-  content: "◦";
-  left: calc(3 * var(--toc-indent-step) - 1.4rem);
-}
-
-.toc-h5::before { 
-  content: "▪";
-  left: calc(4 * var(--toc-indent-step) - 1.4rem);
-}
-
-.toc-h6::before { 
-  content: "▫";
-  left: calc(5 * var(--toc-indent-step) - 1.4rem);
-}
-
-
-.file-anchor {
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
 
 .button-backhome {
   margin-top: 2.5rem;
@@ -295,62 +205,43 @@ body {
   transform: rotate(-10deg);
 }
 
+/* ======================== HA-4.html专属样式 (最终版) ======================== */
 
-@media (max-width: 768px) {
-  .toc-container {
-    padding: 1.5rem 1rem;
-    margin: 1rem auto;
-  }
-  
-  .toc-container h1 {
-    font-size: 1.8rem;
-  }
-  
-  :root {
-    --toc-indent-step: 1.2rem;
-  }
-  
-  .toc-h2::before { left: calc(1 * var(--toc-indent-step) - 1.2rem); }
-  .toc-h3::before { left: calc(2 * var(--toc-indent-step) - 1.2rem); }
-  .toc-h4::before { left: calc(3 * var(--toc-indent-step) - 1.2rem); }
-  .toc-h5::before { left: calc(4 * var(--toc-indent-step) - 1.2rem); }
-  .toc-h6::before { left: calc(5 * var(--toc-indent-step) - 1.2rem); }
+/* === 新增样式: 章节主标题 (古典风格) === */
+.cn,
+._ct {
+  font-family: var(--font-accent);
+  /* 使用优雅衬线字体 */
+  line-height: 1.3;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--accent-color);
 }
 
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-  
-  .toc-container {
-    padding: 1.2rem 0.8rem;
-  }
-  
-  .toc-container h1 {
-    font-size: 1.5rem;
-  }
-  
-  :root {
-    --toc-indent-step: 1rem;
-  }
-  
-  .toc-h1 {
-    font-size: 1.1rem;
-  }
-  
-  .toc-item {
-    font-size: 0.95rem;
-  }
-  
-  .toc-h2::before { left: calc(1 * var(--toc-indent-step) - 0.9rem); }
-  .toc-h3::before { left: calc(2 * var(--toc-indent-step) - 0.9rem); }
-  .toc-h4::before { left: calc(3 * var(--toc-indent-step) - 0.9rem); }
-  .toc-h5::before { left: calc(4 * var(--toc-indent-step) - 0.9rem); }
-  .toc-h6::before { left: calc(5 * var(--toc-indent-step) - 0.9rem); }
+.cn {
+  /* Chapter Number */
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+._ct {
+  /* Chapter Title */
+  letter-spacing: 0.5px;
+  padding-bottom: 0.8rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+/* 标题样式 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--heading-color);
   font-weight: 600;
   margin: 1.2rem 0 0.8rem;
@@ -364,7 +255,7 @@ h1 {
   margin-top: 0;
 }
 
-
+/* 段落样式 - 紧凑间距 */
 p {
   margin: 0.6rem 0;
 }
@@ -373,7 +264,77 @@ p {
   margin: 0.6rem 0;
 }
 
+/* === 新增样式: 小节标题 === */
+.Ahead {
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  color: var(--heading-color);
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.4rem;
+  font-weight: 600;
+}
 
+/* === 新增样式: 引文 (Q1, Q2, Q4) === */
+.Q1,
+.Q2,
+.Q4 {
+  margin: 1rem 1rem 1rem 2.5rem;
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--border-light);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* === 新增样式: 对HTML中特定class的格式化 === */
+/* 斜体 */
+.ital,
+.med-ital {
+  font-style: italic;
+}
+
+/* 粗体 */
+.bold {
+  font-weight: bold;
+}
+
+/* 上标 (例如: 2nd, 8th) */
+.CharOverride-6,
+.CharOverride-13,
+.superscript-roman {
+  vertical-align: super;
+  font-size: 0.75em;
+  line-height: 0;
+}
+
+/* 列表项缩进 (HTML中已包含•符号) */
+.list1,
+.list2,
+.list3 {
+  margin-left: 1em;
+}
+
+/* 数学公式段落居中 */
+.tx-sa-center {
+  text-align: center;
+}
+
+.tx-sa-center-bold {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 图片和图表标题居中 */
+.caption-center {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 图片响应式 - 添加阴影效果 */
 img {
   max-width: 100%;
   height: auto;
@@ -383,31 +344,28 @@ img {
   border-radius: 4px;
 }
 
-
+/* 表格样式 - 添加阴影效果并居中 */
 table {
-  width: auto;
+  width: 100%;
+  /* Ensure table takes up full container width */
   border-collapse: collapse;
-  margin: 1rem auto; 
+  margin: 1rem auto;
   font-size: 0.9rem;
   box-shadow: 0 4px 8px var(--shadow-color);
   border-radius: 6px;
   overflow: hidden;
+  table-layout: fixed;
+  /* This is key for controlling layout */
 }
 
-table.MsoTableGrid {
-  width: auto;
-  overflow-x: auto;
-  display: table;
-}
-
-table, th, td {
-  border: 1px solid var(--table-border);
-}
-
-th, td {
+th,
+td {
   padding: 0.5rem;
   text-align: left;
-  white-space: nowrap;
+  border: 1px solid var(--table-border);
+  word-wrap: break-word;
+  /* Allows long words to break and wrap */
+  /* REMOVE white-space: nowrap; */
 }
 
 th {
@@ -415,13 +373,14 @@ th {
   font-weight: 600;
 }
 
-
-p[align="center"], .MsoNormal[align="center"] {
+/* 居中文本 */
+p[align="center"],
+.MsoNormal[align="center"] {
   text-align: center;
   margin: 1rem 0;
 }
 
-
+/* 导航按钮容器 */
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -430,7 +389,7 @@ p[align="center"], .MsoNormal[align="center"] {
   gap: 10px;
 }
 
-
+/* 导航按钮样式 */
 .nav-btn {
   display: inline-block;
   padding: 0.6rem 1rem;
@@ -456,7 +415,7 @@ p[align="center"], .MsoNormal[align="center"] {
   min-width: 100px;
 }
 
-
+/* 链接样式 */
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -466,37 +425,41 @@ a:hover {
   text-decoration: underline;
 }
 
-
+/* 响应式设计 - 移动设备优化 */
 @media (max-width: 768px) {
   body {
     padding: 15px;
   }
-  
+
   h1 {
     font-size: 1.6rem;
   }
-  
+
+  ._ct {
+    font-size: 1.8rem;
+  }
+
   .nav-container {
     flex-direction: column;
   }
-  
+
   .nav-btn {
     width: 100%;
     margin-bottom: 10px;
   }
-  
-  table, th, td {
+
+  table,
+  th,
+  td {
     font-size: 0.85rem;
     padding: 0.4rem;
   }
-  
 
   table.MsoTableGrid {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
-  
 
   table {
     width: 100%;
@@ -509,33 +472,31 @@ a:hover {
     padding: 10px;
     font-size: 0.95rem;
   }
-  
+
   h1 {
     font-size: 1.4rem;
   }
-  
-  p, .MsoNormal {
+
+  ._ct {
+    font-size: 1.6rem;
+  }
+
+  p,
+  .MsoNormal {
     margin: 0.5rem 0;
   }
-  
 
   table.MsoTableGrid {
     width: 100%;
     display: block;
   }
-  
-  th, td {
+
+  th,
+  td {
     white-space: normal;
   }
-  
 
   img {
     box-shadow: 0 2px 4px var(--shadow-color);
-  }
-  
-
-  :root {
-    --toc-indent-step: 1.2rem;
-    --toc-symbol-offset: 0.3rem;
   }
 }
