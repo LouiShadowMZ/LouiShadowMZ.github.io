@@ -476,15 +476,15 @@ a:hover {
 @media (max-width: 480px) {
   body {
     padding: 10px;
-    font-size: 0.95rem;
+    font-size: 0.7rem;
   }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 
   ._ct {
-    font-size: 1.6rem;
+    font-size: 1rem;
   }
 
   p,
