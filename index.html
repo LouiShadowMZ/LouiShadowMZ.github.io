@@ -317,67 +317,6 @@
             font-size: 1.5rem;
         }
 
-        /* 装饰性元素 */
-        .ornament {
-            position: absolute;
-            opacity: 0.05;
-            z-index: 0;
-            pointer-events: none;
-            font-size: 8rem;
-        }
-
-        .ornament-1 {
-            top: 10%;
-            left: 5%;
-            transform: rotate(15deg);
-        }
-
-        .ornament-2 {
-            bottom: 15%;
-            right: 5%;
-            transform: rotate(-10deg);
-        }
-
-        .ornament-3 {
-            top: 45%;
-            left: 10%;
-            transform: rotate(30deg);
-            font-size: 5rem;
-        }
-
-        .ornament-4 {
-            top: 60%;
-            right: 12%;
-            transform: rotate(-25deg);
-            font-size: 5rem;
-        }
-
-        /* 神秘符号装饰 */
-        .esoteric-symbol {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.02;
-        }
-
-        .symbol-1 {
-            top: 15%;
-            left: 20%;
-            font-size: 4rem;
-            transform: rotate(15deg);
-        }
-
-        .symbol-2 {
-            top: 40%;
-            right: 25%;
-            font-size: 3.5rem;
-            transform: rotate(-20deg);
-        }
-
         /* 移动端适配 */
         @media (max-width: 900px) {
             .tabs-container {
@@ -464,15 +403,8 @@
 
 <body>
     <div class="back">
-        <!-- 装饰性元素 -->
-        <div class="ornament ornament-1"></div>
-       <div class="ornament ornament-2"></div>
-       <div class="ornament ornament-3"></div>
-	<div class="ornament ornament-4"></div>
-
         <div class="toptop">Welcome to Occultism</div>
 
-        <!-- 选项卡导航 -->
         <div class="tabs-container">
             <div class="tab active" data-tab="kp">Kp Astrology</div>
             <div class="tab" data-tab="horary">Horary</div>
@@ -480,7 +412,6 @@
             <div class="tab" data-tab="magick">Magick</div>
         </div>
 
-        <!-- 内容区域 -->
         <div class="content-section active" id="kp-section">
             <div class="section-title">Prof.K.P</div>
             <p class="top01">
@@ -528,10 +459,6 @@
 
 
         <div class="bottle">Wechat Account : guiximeihualu 2025</div>
-
-        <!-- 神秘符号装饰 -->
-        <div class="esoteric-symbol symbol-1">🜁</div>
-        <div class="esoteric-symbol symbol-2">🜃</div>
     </div>
 
 
