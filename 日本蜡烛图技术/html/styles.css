@@ -567,7 +567,7 @@ th {
 @media (max-width: 480px) {
   body {
     padding: 10px;
-    font-size: 2rem;
+    font-size: 17px;
   }
 
   h1,
@@ -579,6 +579,7 @@ th {
   .MsoNormal,
   .bodytext {
     margin: 0.5rem 0;
+    font-size: 17px;
   }
 
   th,
