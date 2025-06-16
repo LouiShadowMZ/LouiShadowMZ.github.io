@@ -324,14 +324,16 @@ p[align="center"] {
     text-align: center;
 }
 
+/* 导航按钮容器 */
 .nav-container {
     display: flex;
     justify-content: space-between;
-    margin: 2.5rem 0 1rem;
+    margin: 2rem 0 1rem;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
 }
 
+/* 导航按钮样式 */
 .nav-btn {
     display: inline-block;
     padding: 0.6rem 1rem;
@@ -409,6 +411,11 @@ a:hover {
 
     .nav-container {
         flex-direction: column;
+    }
+
+    .nav-btn {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 
