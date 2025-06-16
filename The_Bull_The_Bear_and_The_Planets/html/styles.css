@@ -13,6 +13,9 @@
     --text-secondary: #5d4e46;
     --border-light: #d4ccc4;
     --toc-indent-step: 1.5rem;
+    --nav-bg: #f8f9fa;
+    --nav-border: #e0e0e0;
+    --nav-hover: #e8eaed;
 }
 
 /* 暗黑模式变量 */
@@ -28,6 +31,9 @@
         --accent-color: #c5a86c;
         --text-secondary: #b4aba8;
         --border-light: #444;
+        --nav-bg: #1e1e1e;
+        --nav-border: #333333;
+        --nav-hover: #2d2d2d;
     }
 }
 
@@ -243,30 +249,13 @@ body {
 
 /* 新写的代码*/
 
-/* General Text and Paragraph Styles */
-.Text-body-no-indent,
-.Text-caption,
-.Text-caption2,
-.Text-body-no-indent-table,
-.Text-body-no-indent-table1,
-.p_h1_con,
-.Text-body-centered p {
-    margin: 0.6rem 0;
-}
-
-/* Heading Styles */
-.p_h1 {
-    color: var(--text-color);
-    font-weight: 600;
-    margin: 1.2rem 0 0.8rem;
-    line-height: 1.3;
-    font-family: var(--font-accent);
-    font-size: 1.2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 0;
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.p_h1,
 .Title-subhead-level,
 .Title-subhead-level1 {
     color: var(--text-color);
@@ -274,86 +263,75 @@ body {
     margin: 1.2rem 0 0.8rem;
     line-height: 1.3;
     font-family: var(--font-accent);
-    font-size: 1rem;
-    /* Simulating h3 style */
 }
 
-/* Centered Text */
-.Text-body-centered {
-    text-align: center;
-    margin: 1rem 0;
+h1,
+.p_h1 {
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-top: 0;
 }
 
-/* Image Styles */
-.image3,
-.image4 {
+h2,
+.Title-subhead-level,
+.Title-subhead-level1 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 0.8rem 0;
+}
+
+img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0.8rem auto;
+    margin: 1rem auto;
     box-shadow: 0 4px 8px var(--shadow-color);
     border-radius: 4px;
 }
 
-/* Table Styles */
-.No-Table-Style1 {
+table {
     width: auto;
     border-collapse: collapse;
-    margin: 1rem auto;
+    margin: 1.5rem auto;
     font-size: 0.9rem;
     box-shadow: 0 4px 8px var(--shadow-color);
     border-radius: 6px;
     overflow: hidden;
-    border: 1px solid var(--table-border);
 }
 
-.No-Table-Style1 th,
-.No-Table-Style1 td,
-.cell-style-override1,
-.cell-style-override2,
-.calibre8,
-.Cell-Style {
-    border: 1px solid var(--table-border);
-    padding: 0.5rem;
+table,
+th,
+td {
+    border: 1px solid var(--table-border, #dddddd);
+}
+
+th,
+td {
+    padding: 0.8rem 1rem;
     text-align: left;
-    white-space: nowrap;
 }
 
-.No-Table-Style1 th {
-    background-color: var(--table-header-bg);
+th {
+    background-color: var(--table-header-bg, #f5f5f5);
     font-weight: 600;
 }
 
-
-
-/* Specific Fixes for HTML structure */
-.p_h1_con {
-    display: inline;
-    /* To handle divs inside p_h1 */
+.Text-body-centered,
+p[align="center"] {
+    text-align: center;
 }
 
-.rubbish {
-    display: none;
-    /* Hides the unwanted divs in 01.html */
-}
-
-.calibre1,
-.calibre2 {
-    /* These seem to be wrapper divs, ensure they don't add extra style */
-    margin: 0;
-    padding: 0;
-}
-
-/* 导航按钮容器 */
 .nav-container {
     display: flex;
     justify-content: space-between;
-    margin: 2rem 0 1rem;
+    margin: 2.5rem 0 1rem;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 }
 
-/* 导航按钮样式 */
 .nav-btn {
     display: inline-block;
     padding: 0.6rem 1rem;
@@ -377,4 +355,82 @@ body {
 .toc-btn {
     flex: 0.5;
     min-width: 100px;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.Character-Bold,
+.Character-Bold3 {
+    font-weight: bold;
+}
+
+.Character-Italic {
+    font-style: italic;
+}
+
+.Text-caption,
+.Text-caption2 {
+    font-size: 0.9em;
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.calibre1,
+.calibre2 {
+    margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+
+    h1,
+    .p_h1 {
+        font-size: 1.6rem;
+    }
+
+    h2,
+    .Title-subhead-level,
+    .Title-subhead-level1 {
+        font-size: 1.4rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .nav-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 1rem;
+    }
+
+    h1,
+    .p_h1 {
+        font-size: 1.4rem;
+    }
+
+    h2,
+    .Title-subhead-level,
+    .Title-subhead-level1 {
+        font-size: 1.2rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
