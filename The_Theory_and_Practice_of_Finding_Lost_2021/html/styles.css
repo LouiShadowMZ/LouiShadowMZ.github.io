@@ -218,7 +218,7 @@ body {
   font-size: 1.1rem;
   /* 显著增大字体 */
   font-weight: bold;
-  color: var(--accent-color);
+  color: var(--text-color);
   /* 使用主题强调色 */
 }
 
@@ -269,7 +269,7 @@ p {
 .Ahead {
   font-family: var(--font-accent);
   font-size: 1.1rem;
-  color: var(--heading-color);
+  color: var(--text-color);
   margin-top: 2.5rem;
   margin-bottom: 1.2rem;
   border-bottom: 1px solid var(--border-light);
